@@ -300,11 +300,10 @@ export default function OverlayUI() {
         <div className="content-section-full itinerary-section" id="itinerary">
           <div className="content-inner">
             <span className="section-tag reveal-item" style={{ background: '#ec4899' }}>24&ndash;26 APRIL 2026</span>
-            {/*
             <h2 className="itin-title reveal-item" data-delay="100">The Lineup</h2>
             <p className="itin-subtitle reveal-item" data-delay="150">Three nights. Ten acts. One unforgettable experience.</p>
 
-            {/* Day filter tabs * /}
+            {/* Day filter tabs */}
             <div className="itin-tabs reveal-item" data-delay="200">
               <button
                 className={`itin-tab ${activeDay === null ? 'itin-tab--active' : ''}`}
@@ -323,13 +322,15 @@ export default function OverlayUI() {
               ))}
             </div>
 
-            {/* Timeline * /}
+            {/* Timeline */}
             <div className="itin-timeline">
               {filteredDays.map((date, dayIdx) => {
                 const dayItems = ITINERARY.filter((i) => i.date === date)
+                const isComingSoon = date !== '24 April'
+
                 return (
                   <div key={date} className="itin-day-block reveal-item" data-delay={String(300 + dayIdx * 150)}>
-                    {/* Day header * /}
+                    {/* Day header */}
                     <div className="itin-day-head">
                       <div className="itin-day-circle">
                         <span className="itin-day-circle-num">{date.split(' ')[0]}</span>
@@ -341,58 +342,63 @@ export default function OverlayUI() {
                       </div>
                     </div>
 
-                    {/* Performance cards * /}
+                    {/* Performance cards */}
                     <div className="itin-performances">
-                      {dayItems.map((item, idx) => (
-                        <div
-                          key={idx}
-                          className="itin-perf-card"
-                          data-delay={String(400 + dayIdx * 150 + idx * 80)}
-                          style={{
-                            '--accent': TYPE_COLORS[item.type],
-                          } as React.CSSProperties}
-                        >
-                          {/* Artist image * /}
-                          {item.image && (
-                            <div className="itin-perf-image">
-                              <img
-  src={item.image}
-  alt={item.performer}
-  loading="lazy"
-  className={
-  item.performer === 'Naptune'
-    ? 'fit-center'
-    : item.performer === 'Kavi Samelan' ||
-    item.performer === 'Harmony of Pine'
-    ? 'fit-bottom'
-    : 'fit-bottom'
-}
-/>
-                            </div>
-                          )}
-
-                          <div className="itin-perf-content">
-                            <div className="itin-perf-badge" style={{ background: TYPE_COLORS[item.type] }}>
-                              {TYPE_LABELS[item.type]}
-                            </div>
-                            <h3 className="itin-perf-name">{item.performer}</h3>
-                            <div className="itin-perf-meta">
-                              <span className="itin-perf-time">{item.time}</span>
-                              <span className="itin-perf-venue">{item.venue}</span>
-                            </div>
-                          </div>
-
-                          {/* Decorative accent stripe * /}
-                          <div className="itin-perf-stripe" style={{ background: TYPE_COLORS[item.type] }} />
+                      {isComingSoon ? (
+                        <div className="itin-perf-card" style={{ '--accent': '#666', padding: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' } as React.CSSProperties}>
+                          <h3 className="itin-perf-name" style={{ margin: 0, fontSize: '1.5rem', opacity: 0.7 }}>COMING SOON</h3>
+                          <div className="itin-perf-stripe" style={{ background: '#666' }} />
                         </div>
-                      ))}
+                      ) : (
+                        dayItems.map((item, idx) => (
+                          <div
+                            key={idx}
+                            className="itin-perf-card"
+                            data-delay={String(400 + dayIdx * 150 + idx * 80)}
+                            style={{
+                              '--accent': TYPE_COLORS[item.type],
+                            } as React.CSSProperties}
+                          >
+                            {/* Artist image */}
+                            {item.image && (
+                              <div className="itin-perf-image">
+                                <img
+                                  src={item.image}
+                                  alt={item.performer}
+                                  loading="lazy"
+                                  className={
+                                    item.performer === 'Naptune'
+                                      ? 'fit-center'
+                                      : item.performer === 'Kavi Samelan' ||
+                                        item.performer === 'Harmony of Pine'
+                                      ? 'fit-bottom'
+                                      : 'fit-bottom'
+                                  }
+                                />
+                              </div>
+                            )}
+
+                            <div className="itin-perf-content">
+                              <div className="itin-perf-badge" style={{ background: TYPE_COLORS[item.type] }}>
+                                {TYPE_LABELS[item.type]}
+                              </div>
+                              <h3 className="itin-perf-name">{item.performer}</h3>
+                              <div className="itin-perf-meta">
+                                <span className="itin-perf-time">{item.time}</span>
+                                <span className="itin-perf-venue">{item.venue}</span>
+                              </div>
+                            </div>
+
+                            {/* Decorative accent stripe */}
+                            <div className="itin-perf-stripe" style={{ background: TYPE_COLORS[item.type] }} />
+                          </div>
+                        ))
+                      )}
                     </div>
                   </div>
                 )
               })}
             </div>
-            */}
-            <h2 className="itin-title reveal-item" data-delay="100">COMING SOON</h2>
           </div>
         </div>
 
